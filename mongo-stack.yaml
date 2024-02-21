@@ -15,7 +15,9 @@ spec:
       containers:
       - name: mongodb
         image: mongo:4.0.0-xenial
+
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:

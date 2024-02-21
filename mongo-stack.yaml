@@ -15,6 +15,14 @@ spec:
       containers:
       - name: mongodb
         image: mongo:4.0.0-xenial
+        volumeMounts: 
+        - name: mongo-persistent-storage
+          mountPath: /data/db
+      volumes:
+      - name: mongo-persistent-storage
+        hostPath:
+          path: /mnt/some/directory/structure/
+          type: DirectoryOrCreate
 
 ---
 
@@ -38,4 +46,4 @@ spec:
         - name: mongoport
           containerPort: 27017
 
-        type: ClusterIP
+        #type: ClusterIP

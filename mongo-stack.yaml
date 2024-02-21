@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mongodb
+  template: 
+    metadata: 
+      labels: 
+        name: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:4.0.0-xenial
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fleetman-mongodb
+spec:
+  selector:
+    matchLabels:
+      name: mongodb
+  template:
+    metadata:
+      labels:
+        name: mongodb
+    spec:
+      containers:
+      - name: fleetman-mongodb
+        image: mongo:4.0.0-xenial
+        ports:
+        - name: mongoport
+          containerPort: 27017
+
+        type: ClusterIP

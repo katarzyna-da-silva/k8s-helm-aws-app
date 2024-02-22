@@ -18,13 +18,27 @@ spec:
         volumeMounts: 
         - name: mongo-persistent-storage
           mountPath: /data/db
+        resources:
+          requests:
+            memory: 500Mi
+            cpu: 0.5
+       
       volumes:
       - name: mongo-persistent-storage
-        hostPath:
-          path: /mnt/some/directory/structure/
-          type: DirectoryOrCreate
+        #hostPath:
+        # path: /mnt/some/directory/structure/
+        # type: DirectoryOrCreate
+        #awsElasticBlockStore:
+        persistentVolumeClaim:
+          claimName: mongo-pvc
 
 ---
+
+# pvc 
+
+
+---
+
 
 apiVersion: apps/v1
 kind: Deployment
